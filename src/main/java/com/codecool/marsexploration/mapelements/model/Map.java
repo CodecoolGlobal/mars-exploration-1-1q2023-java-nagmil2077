@@ -6,10 +6,12 @@ public class Map {
     private boolean successfullyGenerated;
 
     public Map(String[][] representation) {
+
         this.representation = representation;
     }
 
     public boolean isSuccessfullyGenerated() {
+
         return successfullyGenerated;
     }
 
@@ -18,11 +20,13 @@ public class Map {
     }
 
     private static String createStringRepresentation(String[][] arr) {
+
         return "";
     }
 
     @Override
     public String toString() {
+
         return createStringRepresentation(representation);
     }
 }

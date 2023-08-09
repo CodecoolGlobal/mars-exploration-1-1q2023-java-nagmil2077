@@ -3,6 +3,7 @@ package com.codecool.marsexploration;
 import com.codecool.marsexploration.calculators.service.*;
 import com.codecool.marsexploration.configuration.model.*;
 import com.codecool.marsexploration.configuration.service.*;
+import com.codecool.marsexploration.mapelements.model.MapElement;
 import com.codecool.marsexploration.mapelements.service.builder.*;
 import com.codecool.marsexploration.mapelements.service.generator.*;
 import com.codecool.marsexploration.mapelements.service.placer.*;
@@ -17,16 +18,17 @@ public class Application {
         System.out.println("Mars Exploration Sprint 1");
         MapConfiguration mapConfig = getConfiguration();
 
-        DimensionCalculator dimensionCalculator = null;
-        CoordinateCalculator coordinateCalculator = null;
+        DimensionCalculator dimensionCalculator = new DimensionCalculatorImpl();
+        CoordinateCalculator coordinateCalculator = new CoordinateCalculatorImpl();
 
-        MapElementBuilder mapElementFactory = null;
-        MapElementsGenerator mapElementsGenerator = null;
+        MapElementBuilder mapElementFactory = new MapElementBuilderImpl();
 
-        MapConfigurationValidator mapConfigValidator = null;
-        MapElementPlacer mapElementPlacer = null;
+        MapElementsGenerator mapElementsGenerator = new MapElementsGeneratorImpl();
 
-        MapGenerator mapGenerator = null;
+        MapConfigurationValidator mapConfigValidator = new MapConfigurationValidatorImpl();
+        MapElementPlacer mapElementPlacer = new MapElementPlacerImpl();
+
+        MapGenerator mapGenerator = new MapGeneratorImpl();
 
         createAndWriteMaps(3, mapGenerator, mapConfig);
 
