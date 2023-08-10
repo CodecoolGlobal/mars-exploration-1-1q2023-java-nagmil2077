@@ -25,7 +25,6 @@ public class MapGeneratorImpl implements MapGenerator {
     @Override
     public Map generate(MapConfiguration mapConfig) {
         List<MapElement> mapElements = (List<MapElement>) mapElementsGenerator.createAll(mapConfig);
-        System.out.println("Number of elements: " + mapElements.size());
 
         for (MapElement mapelement : mapElements) {
             boolean canPlaceElement = callCanPlaceElementMethod(map, coordinateCalculator, mapElementPlacer, mapelement);
@@ -33,7 +32,7 @@ public class MapGeneratorImpl implements MapGenerator {
                 mapElementPlacer.placeElement(
                         mapelement,
                         map.getRepresentation(),
-                        coordinateCalculator.getRandomCoordinate(mapelement.getDimension()));
+                        coordinateCalculator.getRandomCoordinate(map.getRepresentation().length));
             } else {
                 callCanPlaceElementMethod(map, coordinateCalculator, mapElementPlacer, mapelement);
             }
@@ -46,6 +45,6 @@ public class MapGeneratorImpl implements MapGenerator {
         return mapElementPlacer.canPlaceElement(
                 mapelement,
                 map.getRepresentation(),
-                coordinateCalculator.getRandomCoordinate(mapelement.getDimension()));
+                coordinateCalculator.getRandomCoordinate(map.getRepresentation().length));
     }
 }
