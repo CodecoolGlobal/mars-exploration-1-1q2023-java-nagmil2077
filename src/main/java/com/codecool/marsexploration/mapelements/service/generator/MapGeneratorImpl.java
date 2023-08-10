@@ -1,5 +1,6 @@
 package com.codecool.marsexploration.mapelements.service.generator;
 
+import com.codecool.marsexploration.calculators.model.Coordinate;
 import com.codecool.marsexploration.calculators.service.CoordinateCalculator;
 import com.codecool.marsexploration.configuration.model.MapConfiguration;
 import com.codecool.marsexploration.mapelements.model.Map;
@@ -22,30 +23,29 @@ public class MapGeneratorImpl implements MapGenerator {
         this.map = map;
     }
 
+
     @Override
     public Map generate(MapConfiguration mapConfig) {
-        List<MapElement> mapElements = (List<MapElement>) mapElementsGenerator.createAll(mapConfig);
+        List<MapElement> mapElements = mapElementsGenerator.createAll(mapConfig);
         System.out.println("Number of elements: " + mapElements.size());
 
         for (MapElement mapelement : mapElements) {
-            boolean canPlaceElement = callCanPlaceElementMethod(map, coordinateCalculator, mapElementPlacer, mapelement);
-            if (canPlaceElement) {
-                mapElementPlacer.placeElement(
-                        mapelement,
-                        map.getRepresentation(),
-                        coordinateCalculator.getRandomCoordinate(mapelement.getDimension()));
-            } else {
-                callCanPlaceElementMethod(map, coordinateCalculator, mapElementPlacer, mapelement);
+            Coordinate randomCoordinate = coordinateCalculator.getRandomCoordinate(mapelement.getDimension());
+            int counter = 0;
+            while (counter < 100 && !mapElementPlacer.canPlaceElement(
+                    mapelement,
+                    map.getRepresentation(),
+                    randomCoordinate)) {
+                randomCoordinate = coordinateCalculator.getRandomCoordinate(mapelement.getDimension());
+                counter++;
             }
+
+            mapElementPlacer.placeElement(
+                    mapelement,
+                    map.getRepresentation(),
+                    coordinateCalculator.getRandomCoordinate(mapelement.getDimension()));
         }
 
         return map;
-    }
-
-    private static boolean callCanPlaceElementMethod(Map map, CoordinateCalculator coordinateCalculator, MapElementPlacer mapElementPlacer, MapElement mapelement) {
-        return mapElementPlacer.canPlaceElement(
-                mapelement,
-                map.getRepresentation(),
-                coordinateCalculator.getRandomCoordinate(mapelement.getDimension()));
     }
 }

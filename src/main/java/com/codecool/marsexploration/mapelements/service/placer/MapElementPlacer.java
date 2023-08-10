@@ -6,4 +6,7 @@ import com.codecool.marsexploration.mapelements.model.MapElement;
 public interface MapElementPlacer {
     boolean canPlaceElement(MapElement element, String[][] map, Coordinate coordinate);
     void placeElement(MapElement element, String[][] map, Coordinate coordinate);
+
+    boolean attemptToPlaceElement(MapElement element, String[][] map);
+
 }

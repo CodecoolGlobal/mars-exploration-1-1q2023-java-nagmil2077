@@ -1,5 +1,6 @@
 package com.codecool.marsexploration;
 
+import com.codecool.marsexploration.calculators.model.Coordinate;
 import com.codecool.marsexploration.calculators.service.*;
 import com.codecool.marsexploration.configuration.model.*;
 import com.codecool.marsexploration.configuration.service.*;
@@ -21,8 +22,6 @@ public class Application {
         System.out.println("Mars Exploration Sprint 1");
         MapConfiguration mapConfig = getConfiguration();
         int mapSizeSqrt = (int) Math.sqrt(mapConfig.mapSize());
-        Map map = new Map(new String[mapSizeSqrt][mapSizeSqrt]);
-
         MapConfigurationValidator mapConfigValidator = new MapConfigurationValidatorImpl();
         System.out.println("MAP CONFIGURATION IS VALID: " + mapConfigValidator.validate(mapConfig));
 
@@ -33,28 +32,20 @@ public class Application {
         MapElementsGenerator mapElementsGenerator = new MapElementsGeneratorImpl(mapElementFactory);
 
         // //
-        List<MapElement> mapElements = (List<MapElement>) mapElementsGenerator.createAll(mapConfig);
+        List<MapElement> mapElements =  mapElementsGenerator.createAll(mapConfig);
         System.out.println("Number of elements: " + mapElements.size());
 
-        MapElementPlacer mapElementPlacer = new MapElementPlacerImpl();
-        for (MapElement mapelement : mapElements) {
-            boolean canPlaceElement = callCanPlaceElementMethod(map, coordinateCalculator, mapElementPlacer, mapelement);
-            if (canPlaceElement) {
-                mapElementPlacer.placeElement(
-                        mapelement,
-                        map.getRepresentation(),
-                        coordinateCalculator.getRandomCoordinate(mapelement.getDimension()));
-            } else {
-                callCanPlaceElementMethod(map, coordinateCalculator, mapElementPlacer, mapelement);
-            }
-        }
-        // //
+        MapElementPlacer mapElementPlacer = new MapElementPlacerImpl(coordinateCalculator);
 
+        // //
+        String[][] mapRepresentation = new String[mapSizeSqrt][mapSizeSqrt];
+        replaceNullWithEmptyStrings(mapRepresentation);
+
+        Map map = new Map(mapRepresentation);
         MapGenerator mapGenerator = new MapGeneratorImpl(map, mapElementsGenerator, coordinateCalculator, mapElementPlacer);
         Map generateMap = mapGenerator.generate(mapConfig);
         generateMap.setSuccessfullyGenerated(true);
         String[][] representation = generateMap.getRepresentation();
-        replaceNullWithEmptyStrings(representation);
 
         for (String[] rep : representation) {
             System.out.println(Arrays.toString(rep));
@@ -64,22 +55,23 @@ public class Application {
 
         System.out.println("Mars maps successfully generated.");
     }
-
     private static void replaceNullWithEmptyStrings(String[][] representation) {
         for (String[] row : representation) {
             Arrays.fill(row, " ");
         }
+        System.out.println(Arrays.deepToString(representation));
     }
 
-    private static boolean callCanPlaceElementMethod(Map map, CoordinateCalculator coordinateCalculator, MapElementPlacer mapElementPlacer, MapElement mapelement) {
+   /* private static boolean callCanPlaceElementMethod(Map map, CoordinateCalculator coordinateCalculator, MapElementPlacer mapElementPlacer, MapElement mapelement) {
         return mapElementPlacer.canPlaceElement(
                 mapelement,
                 map.getRepresentation(),
                 coordinateCalculator.getRandomCoordinate(mapelement.getDimension()));
-    }
+    }*/
 
     private static void createAndWriteMaps(int count, MapGenerator mapGenerator, MapConfiguration mapConfig) {
     }
+
 
     private static MapConfiguration getConfiguration() {
         final String mountainSymbol = "#";
@@ -98,7 +90,7 @@ public class Application {
                 ""
         );
 
-        MapElementConfiguration pitsCfg = new MapElementConfiguration(
+        MapElementConfiguration pitsCfg = new MapElementConfiguration( //TODO preferredlocation symbol
                 pitSymbol,
                 "pits",
                 List.of(

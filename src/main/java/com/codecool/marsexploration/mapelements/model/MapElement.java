@@ -1,7 +1,7 @@
 package com.codecool.marsexploration.mapelements.model;
 
 public class MapElement extends Map {
-    private String[][] representation;
+    //private String[][] representation;
     private String name;
     private int dimension;
     private String preferredLocationSymbol;
@@ -19,6 +19,11 @@ public class MapElement extends Map {
 
     public int getDimension() {
         return dimension;
+    }
+
+
+    public String getPreferredLocationSymbol() {
+        return preferredLocationSymbol;
     }
 
     @Override

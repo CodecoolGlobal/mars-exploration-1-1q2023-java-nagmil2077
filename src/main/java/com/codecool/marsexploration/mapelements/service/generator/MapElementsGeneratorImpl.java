@@ -18,7 +18,7 @@ public class MapElementsGeneratorImpl implements MapElementsGenerator {
     }
 
     @Override
-    public Iterable<MapElement> createAll(MapConfiguration mapConfig) {
+    public List<MapElement> createAll(MapConfiguration mapConfig) {
         List<MapElement> mapElementsList = new ArrayList<>();
         List<MapElementConfiguration> mapElementConfigurations = mapConfig.mapElementConfigurations();
 

@@ -22,7 +22,7 @@ public class MapElementBuilderImpl implements MapElementBuilder {
         int dimension = dimensionCalculator.calculateDimension(size, dimensionGrowth);
         String[][] representation = new String[dimension][dimension];
 
-        replaceNullWithEmptyStrings(representation);
+        representation = replaceNullWithEmptyStrings(representation);
         placeElementRandomlyInRepresentation(size, symbol, dimension, representation);
 
         System.out.println(name);
@@ -37,10 +37,11 @@ public class MapElementBuilderImpl implements MapElementBuilder {
                 preferredLocationSymbol);
     }
 
-    private void replaceNullWithEmptyStrings(String[][] representation) {
+    private String[][] replaceNullWithEmptyStrings(String[][] representation) {
         for (String[] row : representation) {
             Arrays.fill(row, " ");
         }
+        return representation;
     }
 
     private void placeElementRandomlyInRepresentation(int size, String symbol, int dimension, String[][] representation) {
