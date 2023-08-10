@@ -1,5 +1,6 @@
 package com.codecool.marsexploration.mapelements.service.generator;
 
+import com.codecool.marsexploration.calculators.model.Coordinate;
 import com.codecool.marsexploration.calculators.service.CoordinateCalculator;
 import com.codecool.marsexploration.configuration.model.MapConfiguration;
 import com.codecool.marsexploration.mapelements.model.Map;
@@ -44,9 +45,14 @@ public class MapGeneratorImpl implements MapGenerator {
     }
 
     private static boolean callCanPlaceElementMethod(Map map, CoordinateCalculator coordinateCalculator, MapElementPlacer mapElementPlacer, MapElement mapelement) {
+        Coordinate randomCoordinate = coordinateCalculator.getRandomCoordinate(map.getRepresentation().length);
+        System.out.println(randomCoordinate);
+        String[][] map2D = map.getRepresentation();
+
         return mapElementPlacer.canPlaceElement(
                 mapelement,
-                map.getRepresentation(),
-                coordinateCalculator.getRandomCoordinate(map.getRepresentation().length));
+                map2D,
+                randomCoordinate
+                );
     }
 }

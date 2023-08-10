@@ -33,7 +33,7 @@ public class Application {
         MapElementsGenerator mapElementsGenerator = new MapElementsGeneratorImpl(mapElementFactory);
         List<MapElement> mapElements = (List<MapElement>) mapElementsGenerator.createAll(mapConfig);
         System.out.println("Number of elements: " + mapElements.size());
-        MapElementPlacer mapElementPlacer = new MapElementPlacerImpl();
+        MapElementPlacer mapElementPlacer = new MapElementPlacerImpl(coordinateCalculator);
 
         String[][] representation = map.getRepresentation();
         replaceNullWithEmptyStrings(representation);
@@ -92,7 +92,7 @@ public class Application {
                 "minerals",
                 List.of(new ElementToSize(10, 1)),
                 0,
-                ""
+                mountainSymbol
         );
 
         MapElementConfiguration watersCfg = new MapElementConfiguration(
@@ -100,7 +100,7 @@ public class Application {
                 "waters",
                 List.of(new ElementToSize(10, 1)),
                 0,
-                ""
+                pitSymbol
         );
 
 //        List<MapElementConfiguration> elementsCfg = List.of(mountainsCfg);
