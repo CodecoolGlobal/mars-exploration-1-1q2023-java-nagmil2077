@@ -10,7 +10,7 @@ public class MapFileWriterImpl implements MapFileWriter {
     @Override
     public void writeMapFile(Map map, String fileDir) {
         String formattedMap = map.toString();
-        String fileName = "custom.map";
+        String fileName = "generated.map";
 
         try {
             FileWriter writer = new FileWriter(fileDir + "/" + fileName);

@@ -17,7 +17,7 @@ class MapFileWriterImplTest {
                 {"D", "E", "F"}
         });
         String testDir = "src/test/testResources/";
-        File expectedOutputFile = new File(testDir + "custom.map");
+        File expectedOutputFile = new File(testDir + "generated.map");
 
         writer.writeMapFile(testMap, testDir);
 

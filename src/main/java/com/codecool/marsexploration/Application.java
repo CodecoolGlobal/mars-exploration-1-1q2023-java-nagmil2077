@@ -59,7 +59,7 @@ public class Application {
         generatedMap.setSuccessfullyGenerated(true);
 
         MapFileWriter fileWriter = new MapFileWriterImpl();
-        fileWriter.writeMapFile(generateMap, FileDir);
+        fileWriter.writeMapFile(generatedMap, FileDir);
 
 //        for (String[] rep : representation) {
 //            System.out.println(Arrays.toString(rep));
@@ -132,7 +132,6 @@ public class Application {
 
 //        List<MapElementConfiguration> elementsCfg = List.of(mountainsCfg);
         List<MapElementConfiguration> elementsCfg = List.of(mountainsCfg, pitsCfg, mineralsCfg, watersCfg);
-        return new MapConfiguration(625, 0.5, elementsCfg);
+        return new MapConfiguration(1000, 0.5, elementsCfg);
     }
 }
-
