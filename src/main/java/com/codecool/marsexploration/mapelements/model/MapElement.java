@@ -18,6 +18,19 @@ public class MapElement extends Map {
     }
 
     @Override
+    public String[][] getRepresentation() {
+        return representation;
+    }
+
+    public int getDimension() {
+        return dimension;
+    }
+
+    public String getPreferredLocationSymbol() {
+        return preferredLocationSymbol;
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }
