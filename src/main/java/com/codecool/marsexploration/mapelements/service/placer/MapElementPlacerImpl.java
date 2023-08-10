@@ -67,7 +67,7 @@ public class MapElementPlacerImpl implements MapElementPlacer {
             List<Coordinate> preferredLocations = findPreferredLocations(element.getPreferredLocationSymbol(), map);
 
             for (Coordinate preferredLocation : preferredLocations) {
-                Iterable<Coordinate> adjacentCells =
+                List<Coordinate> adjacentCells =
                         coordinateCalculator.getAdjacentCoordinates(preferredLocation, element.getDimension());
 
                 for (Coordinate adjacentCell : adjacentCells) {

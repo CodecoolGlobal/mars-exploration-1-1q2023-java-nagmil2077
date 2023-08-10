@@ -22,13 +22,18 @@ public class Map {
     }
 
     private static String createStringRepresentation(String[][] arr) {
-        StringBuilder sb = new StringBuilder();
-        for(String[] s1 : arr){
-            for(String s2 : s1){
-                sb.append(s2);
+        StringBuilder formattedMap = new StringBuilder();
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                formattedMap.append(arr[i][j]);
+            }
+
+            if (i < arr.length - 1) {
+                formattedMap.append("\n");
             }
         }
-        return sb.toString();
+        return formattedMap.toString();
     }
 
     @Override

@@ -32,7 +32,7 @@ public class MapGeneratorImpl implements MapGenerator {
         for (MapElement mapelement : mapElements) {
             Coordinate randomCoordinate = coordinateCalculator.getRandomCoordinate(mapelement.getDimension());
             int counter = 0;
-            while (counter < 100 && !mapElementPlacer.canPlaceElement(
+            while (counter < 500 && !mapElementPlacer.canPlaceElement(
                     mapelement,
                     map.getRepresentation(),
                     randomCoordinate)) {
@@ -40,10 +40,11 @@ public class MapGeneratorImpl implements MapGenerator {
                 counter++;
             }
 
-            mapElementPlacer.placeElement(
+            mapElementPlacer.attemptToPlaceElement(
                     mapelement,
-                    map.getRepresentation(),
-                    coordinateCalculator.getRandomCoordinate(mapelement.getDimension()));
+                    map.getRepresentation()
+                    //coordinateCalculator.getRandomCoordinate(mapelement.getDimension())
+                    );
         }
 
         return map;

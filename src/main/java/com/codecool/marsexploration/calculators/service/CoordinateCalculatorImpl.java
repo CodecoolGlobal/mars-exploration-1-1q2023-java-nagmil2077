@@ -17,7 +17,7 @@ public class CoordinateCalculatorImpl implements CoordinateCalculator {
     }
 
     @Override
-    public Iterable<Coordinate> getAdjacentCoordinates(Coordinate coordinate, int dimension) {
+    public List<Coordinate> getAdjacentCoordinates(Coordinate coordinate, int dimension) {
         List<Coordinate> coordinates = new ArrayList<>();
         for (int i = -dimension; i <= dimension; i++) {
             for (int j = -dimension; j <= dimension; j++) {
@@ -28,7 +28,7 @@ public class CoordinateCalculatorImpl implements CoordinateCalculator {
     }
 
     @Override
-    public Iterable<Coordinate> getAdjacentCoordinates(Iterable<Coordinate> coordinates, int dimension) {
+    public List<Coordinate> getAdjacentCoordinates(Iterable<Coordinate> coordinates, int dimension) {
         List<Coordinate> resultList = new ArrayList<>();
         for (Coordinate coord1 : coordinates) {
             Iterable<Coordinate> adjacentCoordList = getAdjacentCoordinates(coord1, dimension);

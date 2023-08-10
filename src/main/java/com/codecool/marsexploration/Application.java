@@ -9,6 +9,8 @@ import com.codecool.marsexploration.mapelements.model.MapElement;
 import com.codecool.marsexploration.mapelements.service.builder.*;
 import com.codecool.marsexploration.mapelements.service.generator.*;
 import com.codecool.marsexploration.mapelements.service.placer.*;
+import com.codecool.marsexploration.output.service.MapFileWriter;
+import com.codecool.marsexploration.output.service.MapFileWriterImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,8 @@ import java.util.List;
 public class Application {
     // You can change this to any directory you like
     private static final String WorkDir = "src/main";
+
+    private static final String FileDir = "src/main/resources";
 
     public static void main(String[] args) {
         System.out.println("Mars Exploration Sprint 1");
@@ -47,6 +51,9 @@ public class Application {
         generateMap.setSuccessfullyGenerated(true);
         String[][] representation = generateMap.getRepresentation();
 
+        MapFileWriter fileWriter = new MapFileWriterImpl();
+        fileWriter.writeMapFile(generateMap, FileDir);
+
         for (String[] rep : representation) {
             System.out.println(Arrays.toString(rep));
         }
@@ -61,13 +68,6 @@ public class Application {
         }
         System.out.println(Arrays.deepToString(representation));
     }
-
-   /* private static boolean callCanPlaceElementMethod(Map map, CoordinateCalculator coordinateCalculator, MapElementPlacer mapElementPlacer, MapElement mapelement) {
-        return mapElementPlacer.canPlaceElement(
-                mapelement,
-                map.getRepresentation(),
-                coordinateCalculator.getRandomCoordinate(mapelement.getDimension()));
-    }*/
 
     private static void createAndWriteMaps(int count, MapGenerator mapGenerator, MapConfiguration mapConfig) {
     }
@@ -106,7 +106,7 @@ public class Application {
                 "minerals",
                 List.of(new ElementToSize(10, 1)),
                 0,
-                ""
+                "#"
         );
 
         MapElementConfiguration watersCfg = new MapElementConfiguration(
@@ -114,11 +114,11 @@ public class Application {
                 "waters",
                 List.of(new ElementToSize(10, 1)),
                 0,
-                ""
+                "&"
         );
 
         List<MapElementConfiguration> elementsCfg = List.of(mountainsCfg, pitsCfg, mineralsCfg, watersCfg);
-        return new MapConfiguration(625, 0.5, elementsCfg);
+        return new MapConfiguration(1000, 0.5, elementsCfg);
     }
 }
 
