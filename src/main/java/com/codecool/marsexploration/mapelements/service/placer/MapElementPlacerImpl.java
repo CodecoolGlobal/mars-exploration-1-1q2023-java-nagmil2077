@@ -4,9 +4,12 @@ import com.codecool.marsexploration.calculators.model.Coordinate;
 import com.codecool.marsexploration.calculators.service.CoordinateCalculator;
 import com.codecool.marsexploration.mapelements.model.MapElement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapElementPlacerImpl implements MapElementPlacer {
 
-    private final int maxRetries = 10;
+    private final int maxRetries = 20;
     private final CoordinateCalculator coordinateCalculator;
 
     public MapElementPlacerImpl(CoordinateCalculator coordinateCalculator) {
@@ -38,7 +41,7 @@ public class MapElementPlacerImpl implements MapElementPlacer {
 
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                if (!elementRepresentation[i][j].isEmpty()) {
+                if (!elementRepresentation[i][j].isEmpty()) { //ahol nem üres
                     map[coordinate.x() + i][coordinate.y() + j] = elementRepresentation[i][j];
                 }
             }
@@ -63,7 +66,8 @@ public class MapElementPlacerImpl implements MapElementPlacer {
             List<Coordinate> preferredLocations = findPreferredLocations(element.getPreferredLocationSymbol(), map);
 
             for (Coordinate preferredLocation : preferredLocations) {
-                List<Coordinate> adjacentCells = coordinateCalculator.getAdjacentCoordinates(preferredLocation, element.getDimension());
+                Iterable<Coordinate> adjacentCells =
+                        coordinateCalculator.getAdjacentCoordinates(preferredLocation, element.getDimension());
 
                 for (Coordinate adjacentCell : adjacentCells) {
                     if (canPlaceElement(element, map, adjacentCell)) {
@@ -82,7 +86,7 @@ public class MapElementPlacerImpl implements MapElementPlacer {
     private boolean fallbackPlacementAttempt(MapElement element, String[][] map) {
         int retryCount = 0;
 
-        while (retryCount < MAX_RETRIES) {
+        while (retryCount < maxRetries) {
             Coordinate targetCoord = coordinateCalculator.getRandomCoordinate(map.length);
 
             if (canPlaceElement(element, map, targetCoord)) {

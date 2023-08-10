@@ -39,7 +39,12 @@ public class MapElementsGeneratorImpl implements MapElementsGenerator {
         }
     }
 
-    private void iterateOnElementToSizes(List<MapElement> mapElementsList, int dimensionGrowth, String name, String symbol, String preferredLocationSymbol, List<ElementToSize> elementToSizesList) {
+    private void iterateOnElementToSizes(
+            List<MapElement> mapElementsList,
+            int dimensionGrowth,
+            String name,
+            String symbol,
+            String preferredLocationSymbol, List<ElementToSize> elementToSizesList) {
         for (ElementToSize element : elementToSizesList) {
             int size = element.size();
             int elementCount = element.elementCount();
