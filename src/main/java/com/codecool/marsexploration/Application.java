@@ -83,6 +83,7 @@ public class Application {
                 mountainSymbol,
                 "mountain",
                 List.of(
+                        new ElementToSize(2, 10),
                         new ElementToSize(2, 20),
                         new ElementToSize(1, 30)
                 ),
@@ -94,17 +95,17 @@ public class Application {
                 pitSymbol,
                 "pits",
                 List.of(
-                        new ElementToSize(2, 10),
+                        new ElementToSize(2, 11),
                         new ElementToSize(1, 20)
                 ),
-                10,
+                8,
                 ""
         );
 
         MapElementConfiguration mineralsCfg = new MapElementConfiguration(
                 mineralSymbol,
                 "minerals",
-                List.of(new ElementToSize(10, 1)),
+                List.of(new ElementToSize(16, 1)),
                 0,
                 "#"
         );
@@ -112,7 +113,7 @@ public class Application {
         MapElementConfiguration watersCfg = new MapElementConfiguration(
                 waterSymbol,
                 "waters",
-                List.of(new ElementToSize(10, 1)),
+                List.of(new ElementToSize(15, 1)),
                 0,
                 "&"
         );

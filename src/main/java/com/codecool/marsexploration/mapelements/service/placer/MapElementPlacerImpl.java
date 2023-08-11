@@ -5,6 +5,7 @@ import com.codecool.marsexploration.calculators.service.CoordinateCalculator;
 import com.codecool.marsexploration.mapelements.model.MapElement;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MapElementPlacerImpl implements MapElementPlacer {
@@ -63,13 +64,13 @@ public class MapElementPlacerImpl implements MapElementPlacer {
 
     @Override
     public boolean attemptToPlaceElement(MapElement element, String[][] map) {
-        if (element.getPreferredLocationSymbol() != null && !element.getPreferredLocationSymbol().isEmpty()) {
+        if (element.getPreferredLocationSymbol() != null && !element.getPreferredLocationSymbol().equals("")) {
             List<Coordinate> preferredLocations = findPreferredLocations(element.getPreferredLocationSymbol(), map);
-
+            Collections.shuffle(preferredLocations);
             for (Coordinate preferredLocation : preferredLocations) {
                 List<Coordinate> adjacentCells =
                         coordinateCalculator.getAdjacentCoordinates(preferredLocation, element.getDimension());
-
+                Collections.shuffle(adjacentCells);
                 for (Coordinate adjacentCell : adjacentCells) {
                     if (canPlaceElement(element, map, adjacentCell)) {
                         placeElement(element, map, adjacentCell);
