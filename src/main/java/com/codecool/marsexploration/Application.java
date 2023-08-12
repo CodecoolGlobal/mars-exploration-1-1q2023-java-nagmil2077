@@ -114,7 +114,7 @@ public class Application {
                 "minerals",
                 List.of(new ElementToSize(10, 1)),
                 0,
-                ""
+                mountainSymbol
         );
 
         MapElementConfiguration watersCfg = new MapElementConfiguration(
@@ -122,11 +122,11 @@ public class Application {
                 "waters",
                 List.of(new ElementToSize(10, 1)),
                 0,
-                ""
+                pitSymbol
         );
 
-        List<MapElementConfiguration> elementsCfg = List.of(mountainsCfg);
-//        List<MapElementConfiguration> elementsCfg = List.of(mountainsCfg, pitsCfg, mineralsCfg, watersCfg);
+//        List<MapElementConfiguration> elementsCfg = List.of(mountainsCfg);
+        List<MapElementConfiguration> elementsCfg = List.of(mountainsCfg, pitsCfg, mineralsCfg, watersCfg);
         return new MapConfiguration(625, 0.5, elementsCfg);
     }
 }
