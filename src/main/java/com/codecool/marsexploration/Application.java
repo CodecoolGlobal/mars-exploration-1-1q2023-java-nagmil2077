@@ -9,7 +9,6 @@ import com.codecool.marsexploration.mapelements.service.builder.*;
 import com.codecool.marsexploration.mapelements.service.generator.*;
 import com.codecool.marsexploration.mapelements.service.placer.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class Application {
         MapElementsGenerator mapElementsGenerator = new MapElementsGeneratorImpl(mapElementFactory);
         List<MapElement> mapElements = (List<MapElement>) mapElementsGenerator.createAll(mapConfig);
         System.out.println("Number of elements: " + mapElements.size()); // EDDIG FIXEN JÓ
-        MapElementPlacer mapElementPlacer = new MapElementPlacerImpl();
+        MapElementPlacer mapElementPlacer = new MapElementPlacerImpl(coordinateCalculator);
 
         String[][] representation = map.getRepresentation();
         replaceNullWithEmptyStrings(representation);
@@ -50,9 +49,9 @@ public class Application {
         Map generatedMap = mapGenerator.generate(mapConfig);
         generatedMap.setSuccessfullyGenerated(true);
 
-//        for (String[] rep : representation) {
-//            System.out.println(Arrays.toString(rep));
-//        }
+        for (String[] rep : representation) {
+            System.out.println(Arrays.toString(rep));
+        }
 
         int counter2 = 0;
         for (String[] row : representation) {

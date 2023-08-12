@@ -21,6 +21,14 @@ public class MapElement extends Map {
         return dimension;
     }
 
+    public String getPreferredLocationSymbol() {
+        return preferredLocationSymbol;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return super.toString();
