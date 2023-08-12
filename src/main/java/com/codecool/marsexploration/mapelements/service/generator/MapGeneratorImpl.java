@@ -49,6 +49,7 @@ public class MapGeneratorImpl implements MapGenerator {
             while (!mapElementPlacer.canPlaceElement(actualElementToBePlaced, mapRepresentation, randomCoordinate)) {
                 randomCoordinate = coordinateCalculator.getRandomCoordinate(mapDimension);
             }
+            System.out.println("IN MAP.GEN.: " + actualElementToBePlaced);
             mapElementPlacer.placeElement(actualElementToBePlaced, mapRepresentation, randomCoordinate);
             actualElementToBePlaced.setSuccessfullyGenerated(true);
         }
