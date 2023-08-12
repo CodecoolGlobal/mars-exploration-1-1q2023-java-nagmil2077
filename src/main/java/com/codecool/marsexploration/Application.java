@@ -50,9 +50,9 @@ public class Application {
         Map generatedMap = mapGenerator.generate(mapConfig);
         generatedMap.setSuccessfullyGenerated(true);
 
-        for (String[] rep : representation) {
-            System.out.println(Arrays.toString(rep));
-        }
+//        for (String[] rep : representation) {
+//            System.out.println(Arrays.toString(rep));
+//        }
 
         int counter2 = 0;
         for (String[] row : representation) {
@@ -125,7 +125,8 @@ public class Application {
                 ""
         );
 
-        List<MapElementConfiguration> elementsCfg = List.of(mountainsCfg, pitsCfg, mineralsCfg, watersCfg);
+        List<MapElementConfiguration> elementsCfg = List.of(mountainsCfg);
+//        List<MapElementConfiguration> elementsCfg = List.of(mountainsCfg, pitsCfg, mineralsCfg, watersCfg);
         return new MapConfiguration(625, 0.5, elementsCfg);
     }
 }
