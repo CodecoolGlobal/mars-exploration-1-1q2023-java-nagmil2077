@@ -29,10 +29,10 @@
 This project was created for educational purposes.
 The main goal of this project was to create an application that generates a randomized, Mars themed map using a multidimensional array,
 with an algorithm that places random symbols in different positions.
-The project is seperated into modules which handle different operations of the project:
+The project is separated into modules which handle different operations of the project:
  - Configuration module: configuration settings and rules regarding the map and the placed elements.
  - Calculator module: calculating operations for dimension and coordinates.
- - Mapelements module: building and generating map elements, defining the element placement logic, generating the map.
+ - Map elements module: building and generating map elements, defining the element placement logic, generating the map.
 
 After the map generation is complete, the complete map is written into a specified .map file.
 The project is created using Java language, and the codebase should adhere to SOLID, OOP, and Clean Code principles.
@@ -55,6 +55,7 @@ You can clone the project and install it to see it in action.
 ### Prerequisites
 
 * [Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+* [Maven](https://maven.apache.org/)
 
 ### Installation
 
